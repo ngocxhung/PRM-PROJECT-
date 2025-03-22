@@ -1,151 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:layout_height="match_parent">
 
-    <!-- Back Button and Search (Optional) -->
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:orientation="horizontal"
-        android:background="@android:color/darker_gray">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_revert"
-            android:background="?android:attr/actionBarItemBackground"
-            android:contentDescription="Back"
-            android:onClick="onBackPressed"
-            android:id="@+id/backBtn" />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Search"
-            android:padding="8dp"
-            android:textSize="16sp"
-            android:background="@android:color/transparent"
-            android:focusable="false" />
-
-        <ImageButton
-            android:id="@+id/cartButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_cart"
-            android:background="?android:attr/actionBarItemBackground"
-            android:contentDescription="Cart"
-            android:scaleType="fitCenter" />
-
-        <TextView
-            android:id="@+id/cartBadge"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:text="0"
-            android:textSize="15sp"
-            android:textColor="@android:color/white"
-            android:background="@android:color/holo_red_dark"
-            android:gravity="center"
-            android:layout_marginStart="-8dp"
-            android:layout_marginTop="-8dp" />
-
-    </LinearLayout>
-
-    <!-- Product Image -->
-    <ImageView
-        android:id="@+id/detailImageProduct"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="centerCrop"
-        android:src="@android:drawable/ic_menu_camera" />
-
-    <!-- Product Details (Name, Price, Sales) -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/detailTextProductName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="NAME"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:padding="4dp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/detailImageProduct"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="Product Image"/>
+
+            <TextView
+                android:id="@+id/detailTextProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/detailTextPrice"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Price"
-                android:textSize="16sp"
-                android:padding="4dp" />
+                android:layout_marginTop="8dp"
+                android:textSize="20sp"
+                android:textColor="@android:color/holo_red_dark"/>
 
             <TextView
                 android:id="@+id/detailTextSales"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Sales"
-                android:textSize="16sp"
-                android:padding="4dp"
-                android:gravity="end" />
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/detailTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"/>
         </LinearLayout>
-    </LinearLayout>
 
+    </androidx.core.widget.NestedScrollView>
 
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addToCartButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:text="Add to Cart"
+        app:icon="@drawable/ic_shopping_cart"/>
 
-
-        <Button
-            android:id="@+id/addToCartButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Add to cart"
-
-            android:padding="8dp" />
-
-        <Button
-            android:id="@+id/buyNowButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Buy now"
-            android:drawableStart="@android:drawable/ic_menu_manage"
-            android:padding="8dp" />
-    </LinearLayout>
-
-    <!-- Action Buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="16dp">
-
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
