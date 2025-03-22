@@ -67,52 +67,24 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
         Button addToCartButton = findViewById(R.id.addToCartButton);
         addToCartButton.setOnClickListener(v -> {
-            try {
-                if (product.getUnitQuantity() > 0) {
-                    CartItem item = new CartItem(product, 1, false);
-                    ShoppingCartManager.getInstance().addCartItem(item);
-                    Toast.makeText(this, product.getProductName() + " added to cart", Toast.LENGTH_SHORT).show();
-                    
-                    // Update product quantity
-                    product.setUnitQuantity(product.getUnitQuantity() - 1);
-                    productDAO.updateProduct(product);
-                    displayProductDetails(product);
-                    
-                    // Show option to view cart
-                    new AlertDialog.Builder(this)
-                        .setTitle("Added to Cart")
-                        .setMessage("Would you like to view your cart?")
-                        .setPositiveButton("View Cart", (dialog, which) -> 
-                            startActivity(new Intent(ProductDetailActivity.this, ShoppingCartActivity.class)))
-                        .setNegativeButton("Continue Shopping", null)
-                        .show();
-                } else {
-                    Toast.makeText(this, "Sorry, this item is out of stock", Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "Error adding item to cart: " + e.getMessage(), e);
-                Toast.makeText(this, "Failed to add item to cart", Toast.LENGTH_SHORT).show();
-            }
+            CartItem item = new CartItem(product, 1, false);
+            ShoppingCartManager.getInstance().addCartItem(item);
+            Toast.makeText(this, "Product added to cart", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ProductDetailActivity.this, ShoppingCartActivity.class));
         });
     }
 
     private void displayProductDetails(Product product) {
         if (product != null) {
             detailTextProductName.setText(product.getProductName());
-            detailTextPrice.setText(String.format("$%.2f", product.getUnitPrice()));
-            detailTextSales.setText(String.format("Sales: %d | Stock: %d", product.getSales(), product.getUnitQuantity()));
-            detailTextDescription.setText(product.getProductDescription());
-            
+            detailTextPrice.setText(String.valueOf(product.getUnitPrice()));
+            detailTextSales.setText("Sales: " + product.getSales());
             try {
                 detailImageProduct.setImageResource(product.getImageResId());
             } catch (Exception e) {
                 Log.e(TAG, "Failed to set image", e);
                 detailImageProduct.setImageResource(android.R.drawable.ic_menu_help);
             }
-            
-            // Disable add to cart button if out of stock
-            addToCartButton.setEnabled(product.getUnitQuantity() > 0);
-            addToCartButton.setText(product.getUnitQuantity() > 0 ? "Add to Cart" : "Out of Stock");
         }
     }
 }
